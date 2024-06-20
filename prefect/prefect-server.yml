@@ -15,7 +15,7 @@ spec:
   restartPolicy: Never
   containers:
     - name: prefect-workpool-config-container
-      image: "prefecthq/prefect:2-python3.10"
+      image: "prefecthq/prefect:2-python3.12-kubernetes"
       command: ["/bin/sh", "-c"]
       env:
       - name: PREFECT_API
@@ -27,4 +27,6 @@ spec:
           echo "Server hopefully connected to, downloading base YML."
           git clone https://github.com/D8A-SCIENCE/prefect-cluster.git
           prefect work-pool create --type kubernetes --base-job-template ./prefect-cluster/prefect/dyn-mem-cpu-worker.json k8s-dynamic
-          sleep infinity
+          prefect worker start -p k8s-dynamic
+          echo "---"
+          sleep 99999999999

@@ -11,7 +11,7 @@ RUN apt-get update && \
     install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && \
     kubectl version --client
 
-# Install Prefect
+# Install Prefect 2
 RUN pip install prefect
 
 # Copy the current directory contents into the container at /app

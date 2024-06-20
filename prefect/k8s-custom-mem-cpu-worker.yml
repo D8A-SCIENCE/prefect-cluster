@@ -1,19 +1,24 @@
-#This is the default 
+---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: prefect-job-
+generateName: "{{ name }}-"
 spec:
-  template:
+ttlSecondsAfterFinished: "{{ finished_job_ttl }}"
+template:
     spec:
-      containers:
-      - name: flow-container
-        image: "${CONTAINER_IMAGE}"
+    parallelism: 1
+    completions: 1
+    restartPolicy: Never
+    containers:
+    - name: prefect-job
+        env: "{{ env }}"
+        image: "{{ image }}"
+        args: "{{ command }}"
         resources:
-          requests:
-            memory: "${MEMORY}"
-            cpu: "${CPU}"
-          limits:
-            memory: "${MEMORY}"
-            cpu: "${CPU}"
-      restartPolicy: Never
+            requests:
+                memory: "{{ memory }}Mi"
+                cpu: "{{ cpu }}"
+            limits:
+                memory: "{{ memory }}Mi"
+                cpu: "{{ cpu }}"

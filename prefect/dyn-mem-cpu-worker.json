@@ -1,0 +1,30 @@
+{
+    "apiVersion": "batch/v1",
+    "kind": "Job",
+    "metadata": {
+      "generateName": "prefect-job-"
+    },
+    "spec": {
+      "template": {
+        "spec": {
+          "containers": [
+            {
+              "name": "flow-container",
+              "image": "${CONTAINER_IMAGE}",
+              "resources": {
+                "requests": {
+                  "memory": "${MEMORY}",
+                  "cpu": "${CPU}"
+                },
+                "limits": {
+                  "memory": "${MEMORY}",
+                  "cpu": "${CPU}"
+                }
+              }
+            }
+          ],
+          "restartPolicy": "Never"
+        }
+      }
+    }
+  }

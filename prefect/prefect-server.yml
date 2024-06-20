@@ -26,5 +26,5 @@ spec:
           prefect config set PREFECT_API_URL="${PREFECT_API}"
           echo "Server hopefully connected to, downloading base YML."
           git clone https://github.com/D8A-SCIENCE/prefect-cluster.git
-          prefect work-pool create --type Kubernetes --base-job-template ./prefect-cluster/prefect/k8s-custom-mem-cpu-worker.yml k8s-dynamic
+          prefect work-pool create --type kubernetes --base-job-template ./prefect-cluster/prefect/dyn-mem-cpu-worker.json k8s-dynamic
           sleep infinity

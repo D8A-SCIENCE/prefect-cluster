@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'prefect/prefect-kubectl.dockerfile'
+      - 'prefect/prefect-kubectl.Dockerfile'
       - '.github/workflows/docker-build.yml'
 
 jobs:
@@ -29,11 +29,14 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Define lowercase repository owner
+      id: repo
+      run: echo "REPO_OWNER=${{ github.repository_owner | lower }}" >> $GITHUB_ENV
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v3
       with:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ghcr.io/${{ github.repository_owner }}/prefect-kubectl:latest
-        tags: ghcr.io/${{ github.repository_owner | lower }}/prefect-kubectl:latest  # Ensure lowercase
+        tags: ghcr.io/${{ env.REPO_OWNER }}/prefect-kubectl:latest

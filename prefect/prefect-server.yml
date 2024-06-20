@@ -22,6 +22,7 @@ spec:
         value: "http://128.239.58.222:4200/api"
       args:
         - |
+          sleep 9999999999
           echo "Connecting to prefect server (note this can fail silently)."
           prefect config set PREFECT_API_URL="${PREFECT_API}"
           echo "Server hopefully connected to, downloading base YML."

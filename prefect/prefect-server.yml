@@ -10,11 +10,11 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: prefect
+  name: prefect-workpool-config
 spec:
   restartPolicy: Never
   containers:
-    - name: conda-container
+    - name: prefect-workpool-config-container
       image: "prefecthq/prefect:2-python3.10"
       command: ["/bin/sh", "-c"]
       env:

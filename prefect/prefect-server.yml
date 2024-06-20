@@ -1,0 +1,28 @@
+#Prefect provides ETL and observability, as well as queue management and tracking on a K8S cluster.
+#It has a few parts, including a server and client.
+#This YML assumes you already have a server and IP, installed by the HPC team.
+#It will show you how to stand up prefect and create a variable-resource kubernetes interface
+#through which you can request resources.
+
+#First, we need to dial into the Prefect server and define a new type of
+#worker, a kubernetes worker.  In Prefect, this worker is only submitting
+#jobs to Kubernetes, so the resources don't need to be extensive.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: prefect
+spec:
+  restartPolicy: Never
+  containers:
+    - name: conda-container
+      image: "prefecthq/prefect:2-python3.10"
+      command: ["/bin/sh", "-c"]
+      env:
+      - name: PREFECT_API
+        value: "http://128.239.58.222:4200/api"
+      args:
+        - |
+          echo "Connecting to prefect server (note this can fail silently)."
+          prefect config set PREFECT_API_URL="${PREFECT_API}"
+          echo "Server hopefully connected to, setting up new workpool."
+          sleep infinity

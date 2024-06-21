@@ -15,7 +15,7 @@ spec:
   restartPolicy: Never
   containers:
     - name: prefect-workpool-config-container
-      image: "prefecthq/prefect:2-python3.12-kubernetes"
+      image: "ghcr.io/d8a-science/prefect-kubectl:latest"
       command: ["/bin/sh", "-c"]
       env:
       - name: PREFECT_API

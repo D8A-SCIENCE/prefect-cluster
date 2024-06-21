@@ -4,10 +4,16 @@ FROM python:3.8-slim
 # Set the working directory in the container
 WORKDIR /app
 
-# Install kubectl
+# Install necessary packages
 RUN apt-get update && \
-    apt-get install -y curl && \
-    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
+    apt-get install -y \
+    curl \
+    git \
+    git-lfs \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install and configure kubectl
+RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
     install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && \
     kubectl version --client
 

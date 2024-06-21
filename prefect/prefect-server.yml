@@ -21,7 +21,7 @@ spec:
       - name: PREFECT_API
         value: "http://128.239.58.222:4200/api"
       - name: UPDATE
-        value: TRUE
+        value: "True"
       args:
         - |
           echo "Setting API endpoint for prefect server."
@@ -40,7 +40,7 @@ spec:
               echo "Creating new work pool."
               prefect work-queue create --type kubernetes --base-job-template ./prefect-cluster/prefect/dyn-mem-cpu-worker.json k8s-dynamic
           fi
-          
+
           kubectl get pods
           prefect worker start -p k8s-dynamic
           echo "---"

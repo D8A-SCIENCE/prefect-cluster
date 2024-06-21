@@ -1,7 +1,6 @@
-from prefect import flow
+from prefect import flow, task
 from prefect.deployments import Deployment
-from prefect.infrastructure import KubernetesJob
-from datetime import timedelta
+from prefect_kubernetes import KubernetesJob 
 
 #Import the job to distribute
 testFlow = flow.from_source(

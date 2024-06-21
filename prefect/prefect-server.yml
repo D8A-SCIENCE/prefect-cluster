@@ -28,17 +28,17 @@ spec:
           prefect config set PREFECT_API_URL="${PREFECT_API}"
           echo "Server API set."
           # Check if the work pool 'k8s-dynamic' already exists
-          if prefect work-queue ls | grep -q 'k8s-dynamic'; then
+          if prefect work-pool ls | grep -q 'k8s-dynamic'; then
               if [ "${UPDATE}" = "True" ]; then
                   echo "Work pool 'k8s-dynamic' exists and UPDATE is set to True, updating work pool."
-                  prefect work-queue delete k8s-dynamic --skip-confirmation
-                  prefect work-queue create --type kubernetes --base-job-template ./prefect-cluster/prefect/dyn-mem-cpu-worker.json k8s-dynamic
+                  prefect work-pool delete k8s-dynamic --skip-confirmation
+                  prefect work-pool create --type kubernetes --base-job-template ./prefect-cluster/prefect/dyn-mem-cpu-worker.json k8s-dynamic
               else
                   echo "Work pool 'k8s-dynamic' exists. UPDATE not set to True, skipping creation."
               fi
           else
               echo "Creating new work pool."
-              prefect work-queue create --type kubernetes --base-job-template ./prefect-cluster/prefect/dyn-mem-cpu-worker.json k8s-dynamic
+              prefect work-pool create --type kubernetes --base-job-template ./prefect-cluster/prefect/dyn-mem-cpu-worker.json k8s-dynamic
           fi
 
           kubectl get pods

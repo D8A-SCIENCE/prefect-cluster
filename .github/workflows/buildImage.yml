@@ -33,3 +33,9 @@ jobs:
         file: /images/prefect-kubectl/prefect-kubectrl.Dockerfile
         push: true
         tags: ghcr.io/${{ env.REPO_OWNER }}/prefect-kubectl:latest
+        build-args: BUILDKIT_STEP_LOG_MAX_SIZE=10485760 BUILDKIT_STEP_LOG_MAX_SPEED=100000000
+      env:
+        # Enable Docker CLI debug output
+        DOCKER_BUILDKIT: 1
+        DOCKER_CLI_EXPERIMENTAL: enabled
+        DEBUG: 1

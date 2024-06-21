@@ -9,10 +9,31 @@ testFlow = flow.from_source(
 )
 
 # Define Kubernetes Job with resource specifications
+# Define Kubernetes Job with resource specifications using the new package
 k8s_job = KubernetesJob(
-    cpu="2",  # 2 CPUs
-    memory="4Gi",  # 4GB of memory
-    image="ghcr.io/d8a-science/prefect-kubectl:latest"  # specify your container image
+    job={
+        "metadata": {
+            "labels": {
+                "example": "kubernetes-job"
+            }
+        },
+        "spec": {
+            "template": {
+                "spec": {
+                    "containers": [{
+                        "name": "flow-container",
+                        "image": "ghcr.io/d8a-science/prefect-kubectl:latest",
+                        "resources": {
+                            "limits": {
+                                "cpu": "2",
+                                "memory": "4Gi"
+                            }
+                        }
+                    }]
+                }
+            }
+        }
+    }
 )
 
 # Create the deployment

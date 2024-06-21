@@ -1,7 +1,6 @@
 from prefect import flow
 from prefect.deployments import Deployment
 from prefect.infrastructure import KubernetesJob
-from prefect.orion.schemas.schedules import IntervalSchedule
 from datetime import timedelta
 
 #Import the job to distribute

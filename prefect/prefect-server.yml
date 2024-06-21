@@ -22,12 +22,18 @@ spec:
         value: "http://128.239.58.222:4200/api"
       args:
         - |
-          sleep 9999999999
-          echo "Connecting to prefect server (note this can fail silently)."
+          echo "Setting API endpoint for prefect server."
           prefect config set PREFECT_API_URL="${PREFECT_API}"
-          echo "Server hopefully connected to, downloading base YML."
-          git clone https://github.com/D8A-SCIENCE/prefect-cluster.git
-          prefect work-pool create --type kubernetes --base-job-template ./prefect-cluster/prefect/dyn-mem-cpu-worker.json k8s-dynamic
+          echo "Server API set."
+          # Check if the work pool 'k8s-dynamic' already exists
+          if prefect work-queue ls | grep -q 'k8s-dynamic'; then
+              echo "Work pool 'k8s-dynamic' already exists. Skipping creation."
+          else
+              echo "Creating new work pool."
+              git clone https://github.com/D8A-SCIENCE/prefect-cluster.git
+              prefect work-pool create --type kubernetes --base-job-template ./prefect-cluster/prefect/dyn-mem-cpu-worker.json k8s-dynamic
+          fi
+          kubectl get pods
           prefect worker start -p k8s-dynamic
           echo "---"
           sleep 99999999999

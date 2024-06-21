@@ -18,7 +18,7 @@ RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/s
     kubectl version --client
 
 # Install Prefect 2
-RUN pip install prefect
+RUN pip install prefect prefect-kubernetes
 
 # Copy the current directory contents into the container at /app
 ADD . /app

@@ -31,6 +31,7 @@ spec:
           if prefect work-pool ls | grep -q 'k8s-dynamic'; then
               if [ "${UPDATE}" = "True" ]; then
                   echo "Work pool 'k8s-dynamic' exists and UPDATE is set to True, updating work pool."
+                  git clone https://github.com/D8A-SCIENCE/prefect-cluster.git
                   prefect work-pool delete k8s-dynamic --skip-confirmation
                   prefect work-pool create --type kubernetes --base-job-template ./prefect-cluster/prefect/dyn-mem-cpu-worker.json k8s-dynamic
               else
@@ -38,6 +39,7 @@ spec:
               fi
           else
               echo "Creating new work pool."
+              git clone https://github.com/D8A-SCIENCE/prefect-cluster.git
               prefect work-pool create --type kubernetes --base-job-template ./prefect-cluster/prefect/dyn-mem-cpu-worker.json k8s-dynamic
           fi
 

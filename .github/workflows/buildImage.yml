@@ -29,7 +29,7 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v3
       with:
-        context: .
-        file: /home/runner/work/prefect-cluster/prefect-cluster/prefect/prefectkubectl.Dockerfile
+        context: /home/runner/work/prefect-cluster/prefect-cluster/prefect/
+        file: prefectkubectl.Dockerfile
         push: true
         tags: ghcr.io/${{ env.REPO_OWNER }}/prefect-kubectl:latest

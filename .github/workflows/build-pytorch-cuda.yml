@@ -1,5 +1,5 @@
-name: Build and Push Docker Image
-id: Build Pytorch
+name: Pytorch_Image_Build
+run-name: Build Pytorch CUDA
 on: push
 jobs:
   build-and-push:

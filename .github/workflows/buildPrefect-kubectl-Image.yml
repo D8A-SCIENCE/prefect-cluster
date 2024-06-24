@@ -1,5 +1,5 @@
-name: Build and Push Docker Image
-
+name: Prefect Kubectl Image Build
+run-name: Build Prefect Kubectl
 on: push
 jobs:
   build-and-push:

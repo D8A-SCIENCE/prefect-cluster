@@ -1,5 +1,5 @@
 name: Build and Push Docker Image
-
+id: Build Pytorch
 on: push
 jobs:
   build-and-push:

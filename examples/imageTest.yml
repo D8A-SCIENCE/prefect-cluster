@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: filestore
+  name: CUDA-PYTORCH
 spec:
   restartPolicy: Always
   volumes:
@@ -9,6 +9,9 @@ spec:
       nfs:
         server: 128.239.56.166
         path: /sciclone/geograd
+  securityContext:
+        runAsUser: 71032
+        runAsGroup: 9915
   containers:
     - name: conda-container
       image: "ghcr.io/d8a-science/pytorch-cuda:latest"
@@ -19,8 +22,6 @@ spec:
         limits:
           cpu: 8
           nvidia.com/gpu: 2
-      securityContext:
-        runAsUser: 82656
       command: ["/bin/sh", "-c"]
       args:
         - |

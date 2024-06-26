@@ -4,7 +4,10 @@ FROM pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel
 # Set the working directory in the container
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y apt-transport-https
+RUN apt-get --allow-insecure-repositories install -y apt-transport-https
+
+RUN gpg --recv-keys A4B469963BF863CC
+RUN gpg --export A4B469963BF863CC| apt-key add -
 
 # Install necessary packages
 RUN apt-get update && \

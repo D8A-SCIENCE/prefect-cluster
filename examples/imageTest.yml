@@ -1,3 +1,7 @@
+#Basic image.
+#Note you will need to get your own volume mount users and groups
+#to add your own sciclone drives - the below comments out
+#these parts, as you will be unable to authenticate.
 apiVersion: v1
 kind: Pod
 metadata:
@@ -9,9 +13,9 @@ spec:
   #    nfs:
   #      server: 128.239.56.166
   #      path: /sciclone/geograd
-  securityContext:
-        runAsUser: 71032
-        runAsGroup: 9915
+  #securityContext:
+  #      runAsUser: 71032
+  #      runAsGroup: 9915
   containers:
     - name: conda-container
       image: "ghcr.io/d8a-science/pytorch-cuda:latest"

@@ -1,4 +1,3 @@
-#Works fine with NFS commented out.
 apiVersion: v1
 kind: Pod
 metadata:

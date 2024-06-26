@@ -4,10 +4,13 @@ FROM pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel
 # Set the working directory in the container
 WORKDIR /app
 
-RUN apt-get --allow-insecure-repositories install -y apt-transport-https
+#These are keys for NVIDIA software packages.
+#Necessary due to the CUDA elements of the base image.
+#Otherwise, the apt-get update calls will fail.
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64/7fa2af80.pub
 
-RUN gpg --recv-keys A4B469963BF863CC
-RUN gpg --export A4B469963BF863CC| apt-key add -
+RUN apt-get install -y apt-transport-https
 
 # Install necessary packages
 RUN apt-get update && \
@@ -22,7 +25,7 @@ RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/s
     kubectl version --client
 
 # Install Prefect 2
-RUN pip install prefect-kubernetes
+RUN pip install --ignore-installed prefect-kubernetes
 
 # Copy the current directory contents into the container at /app
 ADD . /app

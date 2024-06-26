@@ -4,13 +4,14 @@ FROM pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel
 # Set the working directory in the container
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y apt-transport-https
+
 # Install necessary packages
 RUN apt-get update && \
     apt-get install -y \
     curl \
     git \
-    git-lfs \
-    && rm -rf /var/lib/apt/lists/*
+    git-lfs 
 
 # Install and configure kubectl
 RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \

@@ -14,6 +14,17 @@ spec:
       volumeMounts:
         - name: geograd
           mountPath: /sciclone/geograd/
+      resources:
+        limits:
+          cpu: 8
+          nvidia.com/gpu: 2
+      securityContext:
+        runAsUser: 82656
+      volumes:
+        - name: geograd
+          nfs:
+            server: 128.239.56.166
+            path: /sciclone/geograd
       command: ["/bin/sh", "-c"]
       args:
         - |

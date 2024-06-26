@@ -1,4 +1,4 @@
-name: Pytorch_Image_Build
+name: Pytorch Image Build
 run-name: Build Pytorch CUDA
 on: push
 jobs:
@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: .
-        file: ./images/pytorch-cuda/pytorch-cuda.Dockerfile
+        file: ./images/pytorch-cuda.Dockerfile
         push: true
         tags: ghcr.io/${{ env.REPO_OWNER }}/pytorch-cuda:latest
         build-args: BUILDKIT_STEP_LOG_MAX_SIZE=10485760 BUILDKIT_STEP_LOG_MAX_SPEED=100000000

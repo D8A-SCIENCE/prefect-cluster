@@ -10,7 +10,7 @@ spec:
         claimName: dsmillerrunfol-rwm
   containers:
     - name: conda-container
-      image: "nvidia/samples:vectoradd-cuda11.2.1"
+      image: "ghcr.io/d8a-science/pytorch-cuda:latest"
       volumeMounts:
         - name: geograd
           mountPath: /sciclone/geograd/

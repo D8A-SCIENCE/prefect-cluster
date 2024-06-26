@@ -5,9 +5,10 @@ metadata:
 spec:
   restartPolicy: Always
   volumes:
-    - name: home-volume
-      persistentVolumeClaim:
-        claimName: dsmillerrunfol-rwm
+    - name: geograd
+      nfs:
+        server: 128.239.56.166
+        path: /sciclone/geograd
   containers:
     - name: conda-container
       image: "ghcr.io/d8a-science/pytorch-cuda:latest"
@@ -20,11 +21,6 @@ spec:
           nvidia.com/gpu: 2
       securityContext:
         runAsUser: 82656
-      volumes:
-        - name: geograd
-          nfs:
-            server: 128.239.56.166
-            path: /sciclone/geograd
       command: ["/bin/sh", "-c"]
       args:
         - |

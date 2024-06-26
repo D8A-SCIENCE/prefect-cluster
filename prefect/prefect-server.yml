@@ -10,7 +10,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: prefect-k8s-launcher
+  name: prefect-k8s-worker
 spec:
   restartPolicy: Never
   containers:

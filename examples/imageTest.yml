@@ -1,22 +1,24 @@
+#Works fine with NFS commented out.
 apiVersion: v1
 kind: Pod
 metadata:
   name: geolab-generic
 spec:
   restartPolicy: Always
-  volumes:
-    - name: geograd
-      nfs:
-        server: 128.239.56.166
-        path: /sciclone/geograd
-  securityContext:
-        runAsUser: 82656
+  #volumes:
+  #  - name: geograd
+  #    nfs:
+  #      server: 128.239.56.166
+  #      path: /sciclone/geograd
+  #securityContext:
+  #      runAsUser: 71032
+  #      runAsGroup: 9915
   containers:
     - name: conda-container
       image: "ghcr.io/d8a-science/pytorch-cuda:latest"
-      volumeMounts:
-        - name: geograd
-          mountPath: /sciclone/geograd/
+  #    volumeMounts:
+  #      - name: geograd
+  #        mountPath: /sciclone/geograd/
       resources:
         limits:
           cpu: 8

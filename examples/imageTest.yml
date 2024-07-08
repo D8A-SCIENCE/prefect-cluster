@@ -15,6 +15,7 @@ spec:
   containers:
     - name: conda-container
       image: "ghcr.io/d8a-science/pytorch-cuda:latest"
+      imagePullPolicy: Always
       volumeMounts:
         - name: geograd
           mountPath: /sciclone/geograd/

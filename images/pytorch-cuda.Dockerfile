@@ -24,8 +24,8 @@ RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/s
     install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && \
     kubectl version --client
 
-# Install Prefect 2
-RUN pip install --ignore-installed prefect-kubernetes geopandas
+# Install Prefect 2 and a few other common packages
+RUN pip install --ignore-installed prefect-kubernetes geopandas rasterio
 
 # Copy the current directory contents into the container at /app
 ADD . /app
